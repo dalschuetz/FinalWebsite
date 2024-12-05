@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Turtle Shelter Project</title>
+  <link rel="stylesheet" href="/styles/styles.css" />
+  <style>
+    /* General Styles */
+    /* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+header button:hover {
+  background-color: #d32f2f;
+}
+
+/* Navigation Bar */
+nav {
+  background-color: #444;
+  color: white;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li form {
+  display: inline;
+}
+
+nav ul li button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+nav ul li button:hover {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+/* Volunteer Form */
+.volunteer-form {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.volunteer-form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 1.1rem;
+}
+
+.volunteer-form input,
+.volunteer-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.volunteer-form button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.volunteer-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: auto;
+}
+.volunteer-form h3 {
+      margin: 0 0 20px;
+      color: #444;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Volunteer Maintenance</h1>
+    <form action="/" method="GET" style="display:inline;">
+      <button type="submit">
+        Logout
+      </button>
+    </form>
+  </header>
+
+  <nav>
+    <ul>
+      <form action="/internal" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Admin Home</li>
+        </button>
+      </form>
+      <form action="/viewUser" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>User Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewVolunteer" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Volunteer Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewEvents" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Event Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewNewsletter" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Newsletter Maintenance</li>
+        </button>
+      </form>
+    </ul>
+  </nav>
+
+  <!-- Volunteer Form -->
+  <div class="volunteer-form">
+    <form action="/editVolunteer/<%= Volunteer.VolunteerID %>" method="post">
+      <h3>Change Volunteer Information</h3>
+      <!-- Contact Info -->
+      <label for="VolFirstName">First Name</label>
+      <input type="text" id="VolFirstName" name="VolFirstName" value="<%= Volunteer.VolFirstName %>" required
+        oninput="this.value = this.value.toUpperCase()" />
+
+      <label for="VolLastName">Last Name</label>
+      <input type="text" id="VolLastName" name="VolLastName" value="<%= Volunteer.VolLastName %>" required
+        oninput="this.value = this.value.toUpperCase()" />
+
+      <label for="Email">Email</label>
+      <input type="email" id="Email" name="Email" value="<%= Volunteer.Email %>" required />
+
+      <label for="Phone">Phone</label>
+      <input type="tel" id="Phone" name="Phone" value="<%= Volunteer.Phone %>" required />
+
+      <label for="VolCity">City</label>
+      <input type="text" id="VolCity" name="VolCity" value="<%= Volunteer.VolCity %>" required
+        oninput="this.value = this.value.toUpperCase()" />
+
+      <label for="VolCounty">County</label>
+      <input type="text" id="VolCounty" name="VolCounty" value="<%= Volunteer.VolCounty %>" required
+        oninput="this.value = this.value.toUpperCase()" />
+
+      <label for="VolState">State</label>
+      <input type="text" id="VolState" name="VolState" value="<%= Volunteer.VolState %>" required
+        oninput="this.value = this.value.toUpperCase()" />
+
+      <!-- How they heard about the opportunity -->
+      <label for="ReferralID">How did you hear about us?</label>
+      <select id="ReferralID" name="ReferralID" required>
+        <% Referral.forEach(Referral => { %>
+        <option value="<%= Referral.ReferralID %>" <%= Referral.ReferralID === Referral.ReferralID ? 'selected' : '' %>>
+          <%= Referral.ReferralName %>
+        </option>
+        <% }) %>
+      </select>
+
+      <!-- Sewing Level -->
+      <label>Sewing Level</label>
+      <label><input type="radio" name="SewingLevel" value="B" <%= Volunteer.SewingLevel === 'B' ? 'checked' : '' %>> Beginner</label>
+      <label><input type="radio" name="SewingLevel" value="I" <%= Volunteer.SewingLevel === 'I' ? 'checked' : '' %>> Intermediate</label>
+      <label><input type="radio" name="SewingLevel" value="E" <%= Volunteer.SewingLevel === 'E' ? 'checked' : '' %>> Expert</label>
+
+      <!-- Hours willing to volunteer -->
+      <label for="HoursPerMonth">Number of hours willing to volunteer per month</label>
+      <input type="number" id="HoursPerMonth" name="HoursPerMonth" value="<%= Volunteer.HoursPerMonth %>" min="1"
+        required />
+
+      <button type="submit">Submit</button>
+
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2024 The Turtle Shelter Project | turtleshelterproject@gmail.com | 801-872-3190
+  </footer>
+
+</body>
+
+</html>

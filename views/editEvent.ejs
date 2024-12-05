@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Event</title>
+    <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+  
+    header {
+      background-color: #333;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0;
+    }
+  
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+  
+    header form button {
+      background-color: #f44336; /* Red background */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    header form button:hover {
+      background-color: #d32f2f; /* Darker red on hover */
+    }
+  
+    .nav {
+      margin-top: 0;
+    }
+  
+    nav {
+      background-color: #444;
+      color: white;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+    }
+  
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+  
+    nav ul li {
+      display: inline;
+    }
+  
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 10px 20px;
+      display: inline-block;
+    }
+  
+    nav ul li a:hover {
+      background-color: #555;
+      border-radius: 4px;
+    }
+
+    /* Event Edit Form Styles */
+    .event-request {
+      margin: 20px;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .event-request h1 {
+      margin: 0 0 20px;
+      color: #444;
+      text-align: center;
+    }
+
+    .event-request label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 1.1rem;
+    }
+
+    .event-request input, 
+    .event-request select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .event-request input[type="radio"], 
+    .event-request input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    .event-request button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .event-request button:hover {
+      background-color: #0056b3;
+    }
+
+    .cancel-button {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .cancel-button:hover {
+      background-color: #545b62;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: auto;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Edit Event</h1>
+        <form action="/" method="GET" style="display:inline;">
+            <button type="submit">Logout</button>
+        </form>
+    </header>
+
+    <nav>
+        <ul>
+            <form action="/internal" method="GET" style="display:inline;">
+                <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+                    <li>Admin Home</li>
+                </button>
+            </form>
+            <form action="/viewUser" method="GET" style="display:inline;">
+                <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+                    <li>User Maintenance</li>
+                </button>
+            </form>
+            <form action="/viewVolunteer" method="GET" style="display:inline;">
+                <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+                    <li>Volunteer Maintenance</li>
+                </button>
+            </form>
+            <form action="/viewEvents" method="GET" style="display:inline;">
+                <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+                    <li>Event Maintenance</li>
+                </button>
+            </form>
+            <form action="/viewNewsletter" method="GET" style="display:inline;">
+                <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+                    <li>Newsletter Maintenance</li>
+                </button>
+            </form>
+        </ul>
+    </nav>
+    
+    <div class="event-request">
+        <form action="/editEvent/<%= event.EventID %>" method="post">
+          <!-- Estimated Attendance -->
+          <label for="EstimatedAttendance">How many people will be there? (rough estimate)</label>
+          <input 
+            type="number" 
+            id="EstimatedAttendance" 
+            name="EstimatedAttendance" 
+            value="<%= event.EstimatedAttendance %>" 
+            required 
+          />
+
+          <!-- Event Type -->
+          <label>Would you like to do sewing, non-sewing, or both?</label>
+          <label>
+            <input 
+              type="radio" 
+              name="EventType" 
+              value="S" 
+              <%= event.EventType === 'S' ? 'checked' : '' %> 
+            /> Sewing
+          </label>
+          <label>
+            <input 
+              type="radio" 
+              name="EventType" 
+              value="N" 
+              <%= event.EventType === 'N' ? 'checked' : '' %> 
+            /> Non-Sewing
+          </label>
+          <label>
+            <input 
+              type="radio" 
+              name="EventType" 
+              value="B" 
+              <%= event.EventType === 'B' ? 'checked' : '' %> 
+            /> Both
+          </label>
+
+          <!-- Event Street Address -->
+          <label for="EventStreetAddress">What is the address of the event?</label>
+          <input 
+            type="text" 
+            id="EventStreetAddress" 
+            name="EventStreetAddress" 
+            value="<%= event.EventStreetAddress %>" 
+            required 
+          />
+
+          <!-- Event City -->
+          <label for="EventCity">What is the city of the event?</label>
+          <input 
+            type="text" 
+            id="EventCity" 
+            name="EventCity" 
+            value="<%= event.EventCity %>" 
+            required 
+          />
+
+          <!-- Event State -->
+          <label for="EventState">What is the state of the event?</label>
+          <input 
+            type="text" 
+            id="EventState" 
+            name="EventState" 
+            value="<%= event.EventState %>" 
+            required 
+          />
+
+          <!-- Start Time -->
+          <label for="StartTime">What time do you want the event to start?</label>
+          <input 
+            type="text" 
+            id="StartTime" 
+            name="StartTime" 
+            value="<%= event.StartTime %>" 
+            required 
+          />
+
+          <!-- First Choice Date -->
+          <label for="FirstChoiceDate">What date would you like to schedule the event?</label>
+          <input 
+            type="date" 
+            id="FirstChoiceDate" 
+            name="FirstChoiceDate" 
+            value="<%= event.FirstChoiceDate %>" 
+            required 
+          />
+
+          <!-- Second Choice Date -->
+          <label for="SecondChoiceDate">What is another date you could schedule the event?</label>
+          <input 
+            type="date" 
+            id="SecondChoiceDate" 
+            name="SecondChoiceDate" 
+            value="<%= event.SecondChoiceDate %>" 
+          />
+
+          <!-- Third Choice Date -->
+          <label for="ThirdChoiceDate">What is another date you could schedule the event?</label>
+          <input 
+            type="date" 
+            id="ThirdChoiceDate" 
+            name="ThirdChoiceDate" 
+            value="<%= event.ThirdChoiceDate %>" 
+          />
+
+          <!-- Duration -->
+          <label for="Duration">How many hours would you like the event to be?</label>
+          <input 
+            type="text" 
+            id="Duration" 
+            name="Duration" 
+            value="<%= event.Duration %>" 
+            required 
+          />
+
+          <!-- Status -->
+          <label for="Status">Event Status</label>
+          <select id="Status" name="Status" required>
+            <option value="P" <%= event.Status === 'P' ? 'selected' : '' %>>Pending</option>
+            <option value="A" <%= event.Status === 'A' ? 'selected' : '' %>>Approved</option>
+            <option value="D" <%= event.Status === 'D' ? 'selected' : '' %>>Declined</option>
+            <option value="C" <%= event.Status === 'C' ? 'selected' : '' %>>Completed</option>
+          </select>
+
+          <!-- Jen's Story -->
+          <label for="JenStoryShare">Would you like Jen to share her story?</label>
+          <input 
+            type="checkbox" 
+            id="JenStoryShare" 
+            name="JenStoryShare" 
+            value="true" 
+            <%= event.JenStoryShare ? 'checked' : '' %> 
+          />
+
+          <!-- Contact Information -->
+          <label for="ContactFirstName">Contact First Name:</label>
+          <input 
+            type="text" 
+            id="ContactFirstName" 
+            name="ContactFirstName" 
+            value="<%= event.ContactFirstName %>" 
+            required 
+          />
+
+          <label for="ContactLastName">Contact Last Name:</label>
+          <input 
+            type="text" 
+            id="ContactLastName" 
+            name="ContactLastName" 
+            value="<%= event.ContactLastName %>" 
+            required 
+          />
+
+          <label for="ContactPhone">Contact Phone:</label>
+          <input 
+            type="tel" 
+            id="ContactPhone" 
+            name="ContactPhone" 
+            value="<%= event.ContactPhone %>" 
+            required 
+          />
+
+          <label for="ContactEmail">Contact Email:</label>
+          <input 
+            type="email" 
+            id="ContactEmail" 
+            name="ContactEmail" 
+            value="<%= event.ContactEmail %>" 
+            required 
+          />
+
+          <!-- Number of Volunteers -->
+          <label for="NumberOfVolunteers">Number of Volunteers:</label>
+          <input 
+            type="number" 
+            id="NumberOfVolunteers" 
+            name="NumberOfVolunteers" 
+            value="<%= event.NumVolunteers %>" 
+          />
+
+          <!-- Vests Produced -->
+          <label for="VestsProduced">Number of Vests Produced:</label>
+          <input 
+            type="number" 
+            id="VestsProduced" 
+            name="VestsProduced" 
+            value="<%= event.VestsProduced %>" 
+          />
+
+          <!-- Collars Produced -->
+          <label for="CollarsProduced">Number of Collars Produced:</label>
+          <input 
+            type="number" 
+            id="CollarsProduced" 
+            name="CollarsProduced" 
+            value="<%= event.CollarsProduced %>" 
+          />
+
+          <!-- Pockets Produced -->
+          <label for="PocketsProduced">Number of Pockets Produced:</label>
+          <input 
+            type="number" 
+            id="PocketsProduced" 
+            name="PocketsProduced" 
+            value="<%= event.PocketsProduced %>" 
+          />
+
+          <!-- Envelopes Produced -->
+          <label for="EnvelopesProduced">Number of Envelopes Produced:</label>
+          <input 
+            type="number" 
+            id="EnvelopesProduced" 
+            name="EnvelopesProduced" 
+            value="<%= event.EnvelopesProduced %>" 
+          />
+
+          <!-- Fully Completed Products -->
+          <label for="FullyCompletedProducts">Number of Fully Completed Products:</label>
+          <input 
+            type="number" 
+            id="FullyCompletedProducts" 
+            name="FullyCompletedProducts" 
+            value="<%= event.FullyCompletedProducts %>" 
+          />
+
+          <!-- Submit Button -->
+          <button type="submit">Update Event</button>
+        </form>
+        <br><br>
+
+    <footer>
+        &copy; 2024 The Turtle Shelter Project | turtleshelterproject@gmail.com | 801-872-3190
+    </footer>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Records</title>
+  <style>
+    /* General Styles for Header and Navbar */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    header form button {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    header form button:hover {
+      background-color: #d32f2f;
+    }
+
+    form button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    form button:hover {
+      background-color: #0056b3;
+    }
+    
+    nav {
+      background-color: #444;
+      color: white;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li {
+      display: inline;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 10px 20px;
+      display: inline-block;
+    }
+
+    nav ul li a:hover {
+      background-color: #555;
+      border-radius: 4px;
+    }
+
+    /* Responsive Table Styles */
+    .table-container {
+      overflow-x: auto;
+      margin: 20px auto;
+      width: 90%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 5px;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    th {
+      background-color: #F2F2F2;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 4px 8px;
+      margin: 2px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>Event Maintenance</h1>
+    <form action="/" method="GET" style="display:inline;">
+      <button type="submit">
+        Logout
+      </button>
+    </form>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <form action="/internal" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left;">
+          <li>Admin Home</li>
+        </button>
+      </form>
+      <form action="/viewUser" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left;">
+          <li>User Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewVolunteer" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left;">
+          <li>Volunteer Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewEvents" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left;">
+          <li>Event Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewNewsletter" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Newsletter Maintenance</li>
+        </button>
+      </form>
+    </ul>
+  </nav>
+
+  <!-- Event Records Section -->
+  <h1 style="text-align: center; color: #333;">Event Records</h1>
+
+  <nav style="text-align: center; margin: 20px;">
+    <a href="/events/status/P">
+      <button>Pending Events</button>
+    </a>
+    <a href="/events/status/D">
+      <button>Declined Events</button>
+    </a>
+    <a href="/events/status/A">
+      <button>Approved Events</button>
+    </a>
+    <a href="/events/status/C">
+      <button>Completed Events</button>
+    </a>
+  </nav>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Estimated Attendance</th>
+          <th>Event Type</th>
+          <th>Event Street Address</th>
+          <th>Event City</th>
+          <th>Event State</th>
+          <th>Start Time</th>
+          <th>First Choice Date</th>
+          <th>Second Choice Date</th>
+          <th>Third Choice Date</th>
+          <th>Duration</th>
+          <th>Status</th>
+          <th>Jen Story Share</th>
+          <th>Contact First Name</th>
+          <th>Contact Last Name</th>
+          <th>Contact Phone</th>
+          <th>Contact Email</th>
+          <th>Number of Volunteers</th>
+          <th>Vests Produced</th>
+          <th>Collars Produced</th>
+          <th>Pockets Produced</th>
+          <th>Envelopes Produced</th>
+          <th>Fully Completed Products</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (events.length > 0) { %>
+          <% events.forEach(event => { %>
+            <tr>
+              <td><%= event.EstimatedAttendance %></td>
+              <td><%= event.EventType %></td>
+              <td><%= event.EventStreetAddress %></td>
+              <td><%= event.EventCity %></td>
+              <td><%= event.EventState %></td>
+              <td><%= event.StartTime %></td>
+              <td><%= event.FirstChoiceDate ? new Date(event.FirstChoiceDate).toLocaleDateString() : '' %></td>
+              <td><%= event.SecondChoiceDate ? new Date(event.SecondChoiceDate).toLocaleDateString() : '' %></td>
+              <td><%= event.ThirdChoiceDate ? new Date(event.ThirdChoiceDate).toLocaleDateString() : '' %></td>
+              <td><%= event.Duration %></td>
+              <td><%= event.Status %></td>
+              <td><%= event.JenStoryShare ? 'Yes' : 'No' %></td>
+              <td><%= event.ContactFirstName %></td>
+              <td><%= event.ContactLastName %></td>
+              <td><%= event.ContactPhone %></td>
+              <td><%= event.ContactEmail %></td>
+              <td><%= event.NumVolunteers %></td>
+              <td><%= event.VestsProduced %></td>
+              <td><%= event.CollarsProduced %></td>
+              <td><%= event.PocketsProduced %></td>
+              <td><%= event.EnvelopesProduced %></td>
+              <td><%= event.FullyCompletedProducts %></td>
+              <td>
+                <form action="/editEvent/<%= event.EventID %>" method="GET" style="display:inline;">
+                  <button type="submit">Edit</button>
+                </form>
+                <form action="/deleteEvent/<%= event.EventID %>" method="POST" style="display:inline;">
+                  <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="23">No data available</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+  <form action="/addEvent" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+    <button type="submit">Add</button>
+  </form>
+
+  <footer>&copy; 2024 The Turtle Shelter Project</footer>
+</body>
+</html>

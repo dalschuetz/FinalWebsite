@@ -1,0 +1,146 @@
+  <!DOCTYPE html>
+
+  <html lang="en">
+  
+   <head>
+  
+     <meta charset="UTF-8" />
+  
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+     <title>The Turtle Shelter Project</title>
+  
+     <link rel="stylesheet" href="/styles/styles.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com" />
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <head>
+      <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        rel="stylesheet"
+      />
+  
+   </head>
+  
+   <body>
+  
+     <div class="nav-menu">
+  
+       <header>
+  
+         <a href="home.ejs"><h1>Turtle Shelter Project</h1></a>
+  
+         <nav>
+          <ul>
+            <li><a href="/addVolunteer">Volunteer</a></li>
+            <li><a href="/addEvent">Host an Event</a></li>
+            <li><a href="/jen">Jen's Story</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/donate">Donate</a></li>
+            <button>
+              <li><a href="/login">Admin Login</a></li>
+            </button>
+          </ul>
+        </nav>
+  
+       </header>
+  
+     </div>
+  
+  
+     <!-- Event Request Form -->
+
+<div class="volunteer-form">
+  <h2>Event Request Form</h2>
+    <form action="/addEvent" method="post">
+      <!-- Attendance Estimate -->
+      <label for="EstimatedAttendance">How many people will be there? (rough estimate)</label>
+      <input type="number" id="EstimatedAttendance" name="EstimatedAttendance" required placeholder="Estimated Attendance"/>
+
+
+      <!-- Event Type -->
+      <br>
+      <label>Would you like to do sewing, non-sewing, or both?</label>
+        <label>
+          <input type="radio" name="EventType" value="S" > Sewing
+        </label>
+        <label>
+          <input type="radio" name="EventType" value="N" > Non-Sewing
+        </label>
+        <label>
+          <input type="radio" name="EventType" value="B"> Both
+        </label>
+
+      <!-- Event Address -->
+      <br>
+      <label for="EventStreetAddress">What is the address of the event?</label>
+      <input type="text" id="EventStreetAddress" name="EventStreetAddress" required placeholder="Street Address"></input>
+
+      <!-- City -->
+      <br>
+      <label for="EventCity">What is the city of the event?</label>
+      <input type="text" id="EventCity" name="EventCity" required placeholder="City Name"/>
+      
+      <!-- State -->
+      <br>
+      <label for="EventState">What is the state of the event?</label>
+      <input type="text" id="EventState" name="EventState" required placeholder="XX"/>
+
+      <!-- Event Duration -->
+      <br>
+      <label for="Duration">How many hours would you like the event to go?</label>
+      <input type="text" id="Duration" name="Duration" required placeholder="Number of Hours"/>
+
+      <!-- Time -->
+      <br>
+      <label for="StartTime">What time do you want the event to start?</label>
+      <input type="text" id="StartTime" name="StartTime" required placeholder="XX:XX AM/PM"/>
+
+      <!-- 1st Choice -->
+      <br>
+      <label for="FirstChoiceDate">What date would you like to schedule the event?</label>
+      <input type="date" id="FirstChoiceDate" name="FirstChoiceDate" required />
+
+      <!-- 2nd Choice -->
+      <br>
+      <label for="SecondChoiceDate">What is another date you could schedule the event?</label>
+      <input type="date" id="SecondChoiceDate" name="SecondChoiceDate"/>
+
+      <!-- 3rd Choice -->
+      <br>
+      <label for="ThirdChoiceDate">What is another date you could schedule the event?</label>
+      <input type="date" id="ThirdChoiceDate" name="ThirdChoiceDate"/>
+
+      <!-- Jen's Story -->
+      <br>
+      <label for="JenStoryShare">Would you like Jen to share her story?</label>
+      <input type="checkbox" id="JenStoryShare" name="JenStoryShare" value="true">
+
+      <!-- Contact Info -->
+      <br>
+      <label for="ContactInfo">What is a good contact name and phone number for the event?</label>
+      <input type="text" id="ContactFirstName" name="ContactFirstName" placeholder="Contact First Name" required placeholder="First Name"/>
+      <input type="text" id="ContactLastName" name="ContactLastName" placeholder="Contact Last Name" required placeholder="Last Name"/>
+      <input type="tel" id="ContactPhone" name="ContactPhone" placeholder="Contact Phone Number" required placeholder="555-555-5555"/>
+      <input type="email" id="ContactEmail" name="ContactEmail" placeholder="Contact Email" required placeholder="example@email.com"/>
+        <br>
+      <button type="submit">Submit</button>
+
+    </form>
+
+  </div>
+  
+     <footer>
+  
+       &copy; 2024 The Turtle Shelter Project | turtleshelterproject@gmail.com |
+  
+       801-872-3190
+  
+     </footer>
+  
+   </body>
+  
+  </html>

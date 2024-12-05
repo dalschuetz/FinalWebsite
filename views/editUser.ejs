@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Maintenance</title>
+  <link rel="stylesheet" href="/styles/styles.css" />
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+  
+    header {
+      background-color: #333;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0; /* Ensure no gap below the header */
+    }
+  
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+  
+    header form button {
+  background-color: #f44336; /* Red background */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+header form button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+  
+    .nav {
+      margin-top: 0; /* Remove top margin to close the gap */
+    }
+  
+    nav {
+      background-color: #444;
+      color: white;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+    }
+  
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+  
+    nav ul li {
+      display: inline;
+    }
+  
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 10px 20px;
+      display: inline-block;
+    }
+  
+    nav ul li a:hover {
+      background-color: #555;
+      border-radius: 4px;
+    }
+  
+    /* Volunteer Form */
+    .volunteer-form {
+      margin: 20px;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  
+    .volunteer-form h3 {
+      margin: 0 0 20px;
+      color: #444;
+    }
+  
+    .volunteer-form label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 1.1rem;
+    }
+  
+    .volunteer-form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  
+    .volunteer-form button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+    }
+  
+    .volunteer-form button:hover {
+      background-color: #0056b3;
+    }
+  
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: auto;
+    }
+  </style>  
+</head>
+<body>
+
+  <header>
+    <h1>User Maintenance</h1>
+    <form action="/" method="GET" style="display:inline;">
+      <button type="submit">
+        Logout
+      </button>
+    </form>
+  </header>
+
+  <nav>
+    <ul>
+      <form action="/internal" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Admin Home</li>
+        </button>
+      </form>
+      <form action="/viewUser" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>User Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewVolunteer" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Volunteer Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewEvents" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Event Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewNewsletter" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Newsletter Maintenance</li>
+        </button>
+      </form>
+    </ul>
+  </nav>
+
+  <!-- Volunteer Form -->
+  <div class="volunteer-form">
+    <h3>Change User Information</h3>
+
+    <form action="/editUser/<%=Admin.UserID%>" method="post">
+      <label for="Username">Username</label>
+      <input type="text" id="Username" name="Username" value="<%= Admin.Username%>" required/>
+
+      <label for="Password">Password</label>
+      <input type="text" id="Password" name="Password" value="<%= Admin.Password%>" required/>
+
+      <label for="AdminFirstName">First Name</label>
+      <input type="text" id="AdminFirstName" name="AdminFirstName" value="<%= Admin.AdminFirstName%>" required oninput="this.value = this.value.toUpperCase()"/>
+
+      <label for="AdminLastName">Last Name</label>
+      <input type="text" id="AdminLastName" name="AdminLastName" value="<%= Admin.AdminLastName%>" required oninput="this.value = this.value.toUpperCase()"/>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2024 The Turtle Shelter Project | turtleshelterproject@gmail.com | 801-872-3190
+  </footer>
+
+</body>
+</html>

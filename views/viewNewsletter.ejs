@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsletter Dashboard</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    header form button {
+  background-color: #f44336; /* Red background */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+header form button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+
+    nav {
+      background-color: #444;
+      color: white;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li {
+      display: inline;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 10px 20px;
+      display: inline-block;
+    }
+
+    nav ul li a:hover {
+      background-color: #555;
+      border-radius: 4px;
+    }
+
+    table {
+      width: 90%;
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+
+    table thead {
+      background-color: #f4f4f4;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #ddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    table th {
+      background-color: #444;
+      color: white;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    form {
+      margin: 0;
+    }
+
+    form button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    form button:hover {
+      background-color: #0056b3;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>Newsletter Maintenance</h1>
+    <form action="/" method="GET" style="display:inline;">
+      <button type="submit">
+        Logout
+      </button>
+    </form>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <form action="/internal" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left;">
+          <li>Admin Home</li>
+        </button>
+      </form>
+      <form action="/viewUser" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left;">
+          <li>User Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewVolunteer" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left;">
+          <li>Volunteer Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewEvents" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left;">
+          <li>Event Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewNewsletter" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Newsletter Maintenance</li>
+        </button>
+      </form>
+    </ul>
+  </nav>
+
+  <!-- Volunteer Records Table -->
+  <h1 style="color: #333;">Newsletter Records</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (Newsletter.length > 0) { %>
+        <% Newsletter.forEach(row => { %>
+          <tr>
+            <td><%= row.NewsletterEmail %></td>
+            <td>
+                <form action="/deleteNewsletter/<%= row.NewsletterID %>" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                  </form>                  
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="11">No data available</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <!-- Add Volunteer Button -->
+  <form action="/addNewsletter" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+    <button type="submit">Add</button>
+  </form>
+
+  <!-- Footer Section -->
+  <footer>
+    &copy; 2024 The Turtle Shelter Project
+  </footer>
+</body>
+</html>

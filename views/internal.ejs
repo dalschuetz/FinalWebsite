@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    /* Logout Button */
+    header button {
+      background-color: #f44336; /* Red color */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    header button:hover {
+      background-color: #d32f2f; /* Darker red when hovered */
+    }
+
+    /* Navbar Styles */
+    nav {
+      background-color: #444;
+      color: white;
+      width: 100%;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li {
+      margin: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Content Area */
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+    }
+
+    .stat {
+      flex: 1;
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .stat h3 {
+      margin: 0;
+      color: #333;
+    }
+
+    .stat p {
+      font-size: 1.2rem;
+      margin: 10px 0 0;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: auto;
+    }
+
+    /* Center the Tableau visualization */
+    .tableauPlaceholder {
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Ensures it's centered vertically as well */
+      margin: 20px 0;
+      width: 100%;
+    }
+
+    .tableauPlaceholder object {
+      max-width: 100%;
+      width: 100%; /* Ensure it takes full width of its container */
+      height: auto; /* Maintain aspect ratio */
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>Admin Dashboard</h1>
+    <form action="/" method="GET" style="display:inline;">
+      <button type="submit">
+        Logout
+      </button>
+    </form>
+  </header>
+
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <form action="/internal" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Admin Home</li>
+        </button>
+      </form>
+      <form action="/viewUser" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>User Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewVolunteer" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Volunteer Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewEvents" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Event Maintenance</li>
+        </button>
+      </form>
+      <form action="/viewNewsletter" method="GET" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color: inherit; font: inherit; text-align: left; cursor: pointer;">
+          <li>Newsletter Maintenance</li>
+        </button>
+      </form>
+    </ul>
+  </nav>
+
+  <!-- Content Area -->
+  <div class="content">
+    <h2 style="text-align: center;">Welcome, Admin!</h2>
+
+    <!-- Statistics Section -->
+    <div class="stats">
+      <div class="stat">
+        <h3>Total Volunteers</h3>
+        <p><%= volunteerCount %></p>
+      </div>
+      <div class="stat">
+        <h3>Total Vests Made</h3>
+        <p><%= vestCount %></p>
+      </div>
+      <div class="stat">
+        <h3>Upcoming Events</h3>
+        <p><%= futureEventCount %></p>
+      </div>
+    </div>
+
+    <!-- Tableau Visualization -->
+    <div class='tableauPlaceholder' id='viz1733427343480' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fi&#47;FinalTurtleTableau&#47;FinalDashboard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FinalTurtleTableau&#47;FinalDashboard' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fi&#47;FinalTurtleTableau&#47;FinalDashboard&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1733427343480');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='100%';vizElement.style.minHeight='1550px';vizElement.style.maxHeight=(divElement.offsetWidth*1.77)+'px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    <!-- Footer Section -->
+  <footer>
+    &copy; 2024 The Turtle Shelter Project
+  </footer>
+</body>
+</html>
